@@ -1,7 +1,7 @@
 {
   "name": "ember-named-blocks-polyfill",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "A polyfill for the Yieldable Named Blocks feature in Ember.",
   "keywords": [
     "ember-addon"
   ],
@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "ember-cli-babel": "^7.19.0",
-    "ember-cli-htmlbars": "^4.3.1"
+    "ember-cli-htmlbars": "^4.3.1",
+    "ember-cli-version-checker": "^5.1.1"
   },
   "devDependencies": {
     "@ember/optional-features": "^1.3.0",

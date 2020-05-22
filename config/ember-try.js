@@ -10,7 +10,7 @@ module.exports = async function() {
         name: 'ember-lts-3.12',
         npm: {
           devDependencies: {
-            'ember-source': '~3.12.0'
+            'ember-source': '~3.12.4'
           }
         }
       },
@@ -18,7 +18,7 @@ module.exports = async function() {
         name: 'ember-lts-3.16',
         npm: {
           devDependencies: {
-            'ember-source': '~3.16.0'
+            'ember-source': '~3.16.1'
           }
         }
       },
@@ -40,6 +40,17 @@ module.exports = async function() {
       },
       {
         name: 'ember-canary',
+        npm: {
+          devDependencies: {
+            'ember-source': await getChannelURL('canary')
+          }
+        }
+      },
+      {
+        name: 'ember-canary-with-polyfill',
+        env: {
+          USE_NAMED_BLOCKS_POLYFILL: 'true',
+        },
         npm: {
           devDependencies: {
             'ember-source': await getChannelURL('canary')
