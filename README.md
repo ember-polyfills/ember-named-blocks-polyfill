@@ -66,7 +66,7 @@ Deviations
 
 This addon aims to be a high fidelity polyfill both in syntax and semantics.
 However, there are serveral cases where we diverged from the implementation
-avialble on Ember canary due to implementation limitations, bugs in the canary
+available on Ember canary due to implementation limitations, bugs in the canary
 implementation or things being underspecified in the [proposal][RFC]. These
 issues are expected to be fixed or unified with upstream behavior in a future
 release.
