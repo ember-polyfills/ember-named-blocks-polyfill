@@ -85,6 +85,17 @@ release.
 * This polyfill implements stricter syntatic checks. The following are
   considered syntax errors:
 
+  * Block names must start with lowercase letters:
+
+    ```hbs
+    <FancyList>
+      <:Foo>...</:Foo>
+      ~~~~~~
+      Syntax Error: <:Foo> is not a valid named block: `Foo` is not a valid
+      block name
+    </FancyList>
+    ```
+
   * Named blocks cannot be self-closing:
 
     ```hbs
