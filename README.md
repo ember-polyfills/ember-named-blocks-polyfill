@@ -72,7 +72,7 @@ issues are expected to be fixed or unified with upstream behavior in a future
 release.
 
 * It is not currently possible to pass an `<:else>` or `<:inverse>` named
-  block. See [#1](/ember-polyfills/ember-named-blocks-polyfill/issues/1).
+  block. See [#1][issue-1].
 
 * The following are considered aliases for each other:
 
@@ -84,7 +84,7 @@ release.
   * `{{has-block-params}}`, `{{has-block-params "main"}}` and `{{has-block-params "default"}}`
   * `{{has-block-params "else"}}` and `{{has-block-params "inverse"}}`
 
-  See [#2](/ember-polyfills/ember-named-blocks-polyfill/issues/2).
+  See [#2][issue-2].
 
 * This polyfill implements stricter syntatic checks. The following are
   considered syntax errors:
@@ -185,7 +185,7 @@ release.
                 Syntax Error: {{has-block}} can only accept a string literal
                 argument
     ```
-  See [#3](/ember-polyfills/ember-named-blocks-polyfill/issues/3).
+  See [#3][issue-3].
 
 * On Ember versions without native named blocks support, when passing only
   named blocks (without passing a `<:default>` or `<:main>` block) to an
@@ -197,7 +197,7 @@ release.
   the polyfill, it problably means that the addon component you are invoking
   does not accept named blocks anyway, so there is no use in passing them.
 
-  See [#4](/ember-polyfills/ember-named-blocks-polyfill/issues/4).
+  See [#4][issue-4].
 
 Due to these issues and differences, if you wish to enable this polyfill even
 when building on canary while these issues are being sorted out upstrea, you
@@ -218,3 +218,7 @@ License
 This project is licensed under the [MIT License](LICENSE.md).
 
 [RFC]: https://github.com/emberjs/rfcs/blob/master/text/0460-yieldable-named-blocks.md
+[issue-1]: https://github.com/ember-polyfills/ember-named-blocks-polyfill/issues/1
+[issue-2]: https://github.com/ember-polyfills/ember-named-blocks-polyfill/issues/2
+[issue-3]: https://github.com/ember-polyfills/ember-named-blocks-polyfill/issues/3
+[issue-4]: https://github.com/ember-polyfills/ember-named-blocks-polyfill/issues/4
