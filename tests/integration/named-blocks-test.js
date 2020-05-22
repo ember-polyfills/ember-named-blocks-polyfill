@@ -3,9 +3,6 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-// eslint-disable-next-line no-undef
-const ALIAS = require.has('dummy/helpers/-has-block');
-
 module('Integration | Named Blocks', function(hooks) {
   setupRenderingTest(hooks);
 
@@ -19,10 +16,7 @@ module('Integration | Named Blocks', function(hooks) {
         {{~yield "explicit-default-block" "explicit-1" "explicit-2" to="default"~}}
       {{else if (eq @target "main")}}
         Rendering main block:
-        {{~yield "main-block" "main-1" "main-2" to="main"~}}
-      {{else if (eq @target "more")}}
-        Rendering more block:
-        {{~yield to="more"~}}
+        {{~yield to="main"~}}
       {{else if (eq @target "alternative")}}
         Rendering alternative block:
         {{~yield "alternative-block" "alternative-1" "alternative-2" "alternative-3" "alternative-4" to="alternative"~}}
@@ -50,13 +44,13 @@ module('Integration | Named Blocks', function(hooks) {
           [{{s1}}] [{{s2}}] [{{s3}}]
         </:default>
 
-        <:more>
-          [:more]
-          I am the more block, without block params.
+        <:main>
+          [:main]
+          I am the main block, without block params.
           [{{d1}}] [{{d2}}] [{{d3}}]
           [{{a1}}] [{{a2}}] [{{a3}}]
           [{{s1}}] [{{s2}}] [{{s3}}]
-        </:more>
+        </:main>
 
         <:alternative as |name a1 a2 a3|>
           [:alternative]
@@ -107,34 +101,18 @@ module('Integration | Named Blocks', function(hooks) {
       'Rendering explicit default block'
     );
 
-    if (ALIAS) {
-      this.set('target', 'main');
-
-      assert.equal(
-        this.element.textContent.trim(), `
-          Rendering main block:
-          [:default]
-          I am main-block.
-          [main-1] [main-2] []
-          [] [] []
-          [] [] []
-        `.trim(),
-        'Rendering main block'
-      );
-    }
-
-    this.set('target', 'more');
+    this.set('target', 'main');
 
     assert.equal(
       this.element.textContent.trim(), `
-          Rendering more block:
-          [:more]
-          I am the more block, without block params.
+          Rendering main block:
+          [:main]
+          I am the main block, without block params.
           [] [] []
           [] [] []
           [] [] []
       `.trim(),
-      'Rendering more block'
+      'Rendering main block'
     );
 
     this.set('target', 'alternative');
@@ -230,7 +208,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
-|    [:main] | ${ALIAS} | ${ALIAS} | false | false |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | false | false | false | false |
@@ -245,7 +223,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
-|    [:main] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | false | false | false | false |
@@ -264,7 +242,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
-|    [:main] | ${ALIAS} | ${ALIAS} | false | false |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | false | false | false | false |
@@ -283,7 +261,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
-|    [:main] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | false | false | false | false |
@@ -300,8 +278,8 @@ module('Integration | Named Blocks', function(hooks) {
     assert.equal(
       this.element.textContent.trim(), `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
-|            | ${ALIAS} | ${ALIAS} | false | false |
-| [:default] | ${ALIAS} | ${ALIAS} | false | false |
+|            | false | false | false | false |
+| [:default] | false | false | false | false |
 |    [:main] | true | true | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
@@ -319,8 +297,8 @@ module('Integration | Named Blocks', function(hooks) {
     assert.equal(
       this.element.textContent.trim(), `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
-|            | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
-| [:default] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|            | false | false | false | false |
+| [:default] | false | false | false | false |
 |    [:main] | true | true | true | true |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
@@ -379,7 +357,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
-|    [:main] | ${ALIAS} | ${ALIAS} | false | false |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | true | true | false | false |
@@ -399,7 +377,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
-|    [:main] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | true | true | false | false |
@@ -419,7 +397,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
-|    [:main] | ${ALIAS} | ${ALIAS} | false | false |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | true | true | true | true |
@@ -439,7 +417,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
-|    [:main] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | true | true | true | true |
@@ -469,7 +447,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
-|    [:main] | ${ALIAS} | ${ALIAS} | false | false |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | false | false | false | false |
@@ -484,7 +462,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
-|    [:main] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|    [:main] | false | false | false | false |
 | [:inverse] | false | false | false | false |
 |    [:else] | false | false | false | false |
 |   [:other] | false | false | false | false |
@@ -505,7 +483,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
-|    [:main] | ${ALIAS} | ${ALIAS} | false | false |
+|    [:main] | false | false | false | false |
 | [:inverse] | true | true | false | false |
 |    [:else] | true | true | false | false |
 |   [:other] | false | false | false | false |
@@ -526,7 +504,7 @@ module('Integration | Named Blocks', function(hooks) {
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
-|    [:main] | ${ALIAS} | ${ALIAS} | ${ALIAS} | ${ALIAS} |
+|    [:main] | false | false | false | false |
 | [:inverse] | true | true | false | false |
 |    [:else] | true | true | false | false |
 |   [:other] | false | false | false | false |
