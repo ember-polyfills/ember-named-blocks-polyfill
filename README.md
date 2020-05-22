@@ -217,4 +217,4 @@ License
 
 This project is licensed under the [MIT License](LICENSE.md).
 
-[1]: https://github.com/emberjs/rfcs/blob/master/text/0460-yieldable-named-blocks.md
+[RFC]: https://github.com/emberjs/rfcs/blob/master/text/0460-yieldable-named-blocks.md
