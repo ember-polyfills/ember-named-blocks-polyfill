@@ -85,6 +85,17 @@ release.
 * This polyfill implements stricter syntatic checks. The following are
   considered syntax errors:
 
+  * Named blocks cannot be self-closing:
+
+    ```hbs
+    <FancyList>
+      <:foo />
+      ~~~~~~~~
+      Syntax Error: <:Foo> is not a valid named block: named blocks cannot be
+      self-closing
+    </FancyList>
+    ```
+
   * Passing named blocks to HTML elements:
 
     ```hbs
