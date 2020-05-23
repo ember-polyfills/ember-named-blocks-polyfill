@@ -76,18 +76,36 @@ release.
 
 * The following are considered aliases for each other:
 
-  * `<:main>` and `<:default>` blocks
-  * `{{yield}}`, `{{yield to="main"}}` and `{{yield to="default"}}`
   * `{{yield to="else"}}` and `{{yield to="inverse"}}`
-  * `{{has-block}}`, `{{has-block "main"}}` and `{{has-block "default"}}`
   * `{{has-block "else"}}` and `{{has-block "inverse"}}`
-  * `{{has-block-params}}`, `{{has-block-params "main"}}` and `{{has-block-params "default"}}`
   * `{{has-block-params "else"}}` and `{{has-block-params "inverse"}}`
 
   See [#2][issue-2].
 
 * This polyfill implements stricter syntatic checks. The following are
   considered syntax errors:
+
+  * Block names must start with lowercase letters:
+
+    ```hbs
+    <FancyList>
+      <:Foo>...</:Foo>
+      ~~~~~~
+      Syntax Error: <:Foo> is not a valid named block: `Foo` is not a valid
+      block name
+    </FancyList>
+    ```
+
+  * Named blocks cannot be self-closing:
+
+    ```hbs
+    <FancyList>
+      <:foo />
+      ~~~~~~~~
+      Syntax Error: <:Foo> is not a valid named block: named blocks cannot be
+      self-closing
+    </FancyList>
+    ```
 
   * Passing named blocks to HTML elements:
 
@@ -151,16 +169,6 @@ release.
 
     ```hbs
     <FancyList>
-      <:main>The main block</:main>
-      <:default>The default block</:default>
-      ~~~~~~~~~~
-      Syntax Error: Cannot pass named blocks <:main> and <:default> in the same
-      invocation
-    </FancyList>
-    ```
-
-    ```hbs
-    <FancyList>
       <:else>The else block</:else>
       <:inverse>The inverse block</:inverse>
       ~~~~~~~~~~
@@ -188,9 +196,9 @@ release.
   See [#3][issue-3].
 
 * On Ember versions without native named blocks support, when passing only
-  named blocks (without passing a `<:default>` or `<:main>` block) to an
-  external (addon) component whose template was not preprocessed by this
-  polyfill, `{{has-block}}` in that component's template will return `true`.
+  named blocks (without passing a `<:default>` block) to an external (addon)
+  component whose template was not preprocessed by this polyfill,
+  `{{has-block}}` in that component's template will return `true`.
 
   This is unlikely to be an issue in practice – if you are running an Ember
   version that requires this polyfill and the addon itself is not also using
