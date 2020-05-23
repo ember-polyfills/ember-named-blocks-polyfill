@@ -1,6 +1,6 @@
 {
   "name": "ember-named-blocks-polyfill",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A polyfill for the Yieldable Named Blocks feature in Ember.",
   "keywords": [
     "ember-addon"
