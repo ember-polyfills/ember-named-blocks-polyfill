@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "moduleResolution": "node",
+    "checkJs": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "ember-named-blocks-polyfill/*": ["addon/*"],
+    }
+  },
+  "include": ["addon", "app", "lib"],
+  "exclude": ["dist", "node_modules", "tmp"]
+}

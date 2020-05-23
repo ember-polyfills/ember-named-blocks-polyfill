@@ -16,7 +16,7 @@ export function namedBlockInvocation(block) {
     configurable: true,
     enumerable: false,
     writable: false,
-    value: () => `{{yield to=${JSON.stringify(this.block)}}}`,
+    value: () => `{{yield to=${JSON.stringify(block)}}}`,
   });
 
   INVOCATIONS.set(invocation, block);
@@ -32,7 +32,7 @@ export function namedBlockInvocation(block) {
  * @returns {boolean}
  */
 export function isNamedBlockInvocation(value, block) {
-  if (INVOCATIONS.has(value)) {
+  if (typeof value === 'object' && value !== null && INVOCATIONS.has(value)) {
     return block === INVOCATIONS.get(value);
   } else {
     return block === 'default';
@@ -46,7 +46,7 @@ export function isNamedBlockInvocation(value, block) {
  * @returns {value is BlocksInfo}
  */
 export function isBlocksInfo(value) {
-  return value && typeof value === 'object' &&
+  return typeof value === 'object' && value !== null &&
     Object.getPrototypeOf(value) === null &&
-    Object.keys(value).every(k => typeof value[k] === 'number');
+    Object.values(value).every(v => typeof v === 'number');
 }
