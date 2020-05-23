@@ -5,6 +5,7 @@
     "checkJs": true,
     "skipLibCheck": true,
     "noEmit": true,
+    "strict": true,
     "baseUrl": ".",
     "paths": {
       "ember-named-blocks-polyfill/*": ["addon/*"],
