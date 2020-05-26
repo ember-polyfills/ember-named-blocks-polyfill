@@ -144,13 +144,13 @@ release.
     </FancyList>
     ```
 
-  * Passing arguments, attribues or modifiers to named blocks:
+  * Passing arguments, attributes or modifiers to named blocks:
 
     ```hbs
     <FancyList>
       <:header class="row">My Header</:header>
                ~~~~~~~~~~~
-               Syntax Error: named block <:header> cannot have attribues or
+               Syntax Error: named block <:header> cannot have attributes or
                arguments
     </FancyList>
     ```
