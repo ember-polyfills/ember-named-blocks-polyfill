@@ -5,7 +5,10 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ember-polyfills/ember-named-blocks-polyfill.git",
+  },
   "license": "MIT",
   "author": "",
   "directories": {
