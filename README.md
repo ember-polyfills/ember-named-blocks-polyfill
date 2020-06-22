@@ -2,7 +2,8 @@ ember-named-blocks-polyfill
 ==============================================================================
 
 This addon provides a polyfill for the [Yieldable Named Blocks][RFC] feature.
-On Ember.js versions with native support for the feature, this addon is inert.
+When the feature lands in Ember.js, this addon will be updated to be inert on
+versions with native support.
 
 
 Compatibility

@@ -2,7 +2,7 @@
 
 const VersionChecker = require('ember-cli-version-checker');
 
-const MINIMUM_NAMED_BLOCKS_VERSION = '3.20.0-beta.0';
+const MINIMUM_NAMED_BLOCKS_VERSION = '99.99.99';
 
 module.exports = {
   name: require('./package').name,
