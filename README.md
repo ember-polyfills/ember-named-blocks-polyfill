@@ -209,7 +209,7 @@ release.
   See [#4][issue-4].
 
 Due to these issues and differences, if you wish to enable this polyfill even
-when building on canary while these issues are being sorted out upstrea, you
+when building on canary while these issues are being sorted out upstream, you
 can set the `USE_NAMED_BLOCKS_POLYFILL` environment variable to `true` when
 running the build. This will transpile away any named blocks related syntax in
 the final build and uses the runtime code in this addon to emulate the feature.
