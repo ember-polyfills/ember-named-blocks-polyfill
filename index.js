@@ -4,6 +4,8 @@ const VersionChecker = require('ember-cli-version-checker');
 
 const MINIMUM_NAMED_BLOCKS_VERSION = '99.99.99';
 
+const FALSE = ['false', 'disable', 'no', 'off', '0'];
+
 module.exports = {
   name: require('./package').name,
 
@@ -44,8 +46,6 @@ module.exports = {
     }
   }
 };
-
-const FALSE = ['false', 'disable', 'no', 'off', '0'];
 
 function flag(flag) {
   if (flag === undefined) {
