@@ -22,15 +22,8 @@ module.exports = {
 
   setupPreprocessorRegistry(_type, registry) {
     if (this.usePolyfill()) {
-      registry.add('htmlbars-ast-plugin', {
-        name: 'named-blocks-polyfill',
-
-        plugin: require('./lib/named-blocks-polyfill-plugin.js'),
-
-        baseDir: function() {
-          return __dirname;
-        }
-      });
+      let plugin = this._buildTemplatePlugin();
+      registry.add('htmlbars-ast-plugin', plugin);
     }
   },
 
@@ -44,7 +37,21 @@ module.exports = {
     if (this.usePolyfill()) {
       return this._super.treeForApp.apply(this, arguments);
     }
-  }
+  },
+
+  _buildTemplatePlugin() {
+    let plugin = require('./lib/named-blocks-polyfill-plugin.js');
+    return {
+      name: 'named-blocks-polyfill',
+      plugin,
+      baseDir() { return __dirname; },
+      parallelBabel: {
+        requireFile: __filename,
+        buildUsing: '_buildTemplatePlugin',
+        params: {},
+      }
+    };
+  },
 };
 
 function flag(flag) {
