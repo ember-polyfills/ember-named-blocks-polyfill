@@ -26,10 +26,10 @@ jobs:
           - release
           - beta
           - canary
-          - canary-with-polyfill
           - classic
           - lts-3.12
           - lts-3.16
+          - lts-3.20
     steps:
       - name: Checkout
         uses: actions/checkout@v1
