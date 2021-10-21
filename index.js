@@ -44,12 +44,14 @@ module.exports = {
     return {
       name: 'named-blocks-polyfill',
       plugin,
-      baseDir() { return __dirname; },
+      baseDir() {
+        return __dirname;
+      },
       parallelBabel: {
         requireFile: __filename,
         buildUsing: '_buildTemplatePlugin',
         params: {},
-      }
+      },
     };
   },
 };

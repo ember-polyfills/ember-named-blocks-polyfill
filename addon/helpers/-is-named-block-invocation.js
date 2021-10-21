@@ -11,7 +11,7 @@ export default helper(
   function _isNamedBlockInvocation(params, hash) {
     assert(
       '-is-named-block-invocation takes exactly two arguments: ' +
-      'the invocation value to check and the name of the block',
+        'the invocation value to check and the name of the block',
       params.length === 2 && typeof params[1] === 'string'
     );
 
