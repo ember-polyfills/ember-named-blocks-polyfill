@@ -46,7 +46,10 @@ export function isNamedBlockInvocation(value, block) {
  * @returns {value is BlocksInfo}
  */
 export function isBlocksInfo(value) {
-  return typeof value === 'object' && value !== null &&
+  return (
+    typeof value === 'object' &&
+    value !== null &&
     Object.getPrototypeOf(value) === null &&
-    Object.values(value).every(v => typeof v === 'number');
+    Object.values(value).every((v) => typeof v === 'number')
+  );
 }

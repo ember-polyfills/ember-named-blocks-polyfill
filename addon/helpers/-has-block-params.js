@@ -13,10 +13,11 @@ export default helper(
 
     assert(
       '-has-block-params takes exactly three arguments: the blocks ' +
-      'info hash, the name of the block and the fallback value',
+        'info hash, the name of the block and the fallback value',
       params.length === 3 &&
         (blocksInfo === undefined || isBlocksInfo(blocksInfo)) &&
-        typeof block === 'string' && typeof fallback === 'boolean'
+        typeof block === 'string' &&
+        typeof fallback === 'boolean'
     );
 
     assert(

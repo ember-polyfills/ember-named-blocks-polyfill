@@ -3,11 +3,13 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Named Blocks', function(hooks) {
+module('Integration | Named Blocks', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it can pass and yield to named blocks', async function(assert) {
-    this.owner.register('template:components/yielder', hbs`
+  test('it can pass and yield to named blocks', async function (assert) {
+    this.owner.register(
+      'template:components/yielder',
+      hbs`
       {{#if (eq @target "default")}}
         Rendering default block:
         {{~yield "default-block" "default-1" "default-2"~}}
@@ -27,7 +29,8 @@ module('Integration | Named Blocks', function(hooks) {
         Rendering nope block:
         {{~yield "nope-block" "nope-1" to="nope"~}}
       {{/if}}
-    `);
+    `
+    );
 
     this.set('target', 'default');
 
@@ -76,7 +79,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering default block:
           [:default]
           I am default-block.
@@ -90,7 +94,8 @@ module('Integration | Named Blocks', function(hooks) {
     this.set('target', 'explicit');
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering explicit default block:
           [:default]
           I am explicit-default-block.
@@ -104,7 +109,8 @@ module('Integration | Named Blocks', function(hooks) {
     this.set('target', 'main');
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering main block:
           [:main]
           I am the main block, without block params.
@@ -118,7 +124,8 @@ module('Integration | Named Blocks', function(hooks) {
     this.set('target', 'alternative');
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering alternative block:
           [:alternative]
           I am alternative-block.
@@ -132,7 +139,8 @@ module('Integration | Named Blocks', function(hooks) {
     this.set('target', 'nope');
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering nope block:
       `.trim(),
       'Rendering nope block'
@@ -141,7 +149,8 @@ module('Integration | Named Blocks', function(hooks) {
     this.set('target', 'supplement');
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering supplement block:
           [:supplement]
           I am supplement-block.
@@ -154,16 +163,13 @@ module('Integration | Named Blocks', function(hooks) {
 
     this.set('target', 'wat');
 
-    assert.equal(
-      this.element.textContent.trim(),
-      '',
-      'Rendering wat block'
-    );
+    assert.equal(this.element.textContent.trim(), '', 'Rendering wat block');
 
     this.set('target', 'default');
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
           Rendering default block:
           [:default]
           I am default-block.
@@ -175,8 +181,10 @@ module('Integration | Named Blocks', function(hooks) {
     );
   });
 
-  test('it works with has-block and has-block-params', async function(assert) {
-    this.owner.register('template:components/has', hbs`
+  test('it works with has-block and has-block-params', async function (assert) {
+    this.owner.register(
+      'template:components/has',
+      hbs`
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | {{hasBlock}} | {{has-block}} | {{hasBlockParams}} | {{has-block-params}} |
 | [:default] | {{hasBlock "default"}} | {{has-block "default"}} | {{hasBlockParams "default"}} | {{has-block-params "default"}} |
@@ -184,12 +192,14 @@ module('Integration | Named Blocks', function(hooks) {
 | [:inverse] | {{hasBlock "inverse"}} | {{has-block "inverse"}} | {{hasBlockParams "inverse"}} | {{has-block-params "inverse"}} |
 |    [:else] | {{hasBlock "else"}} | {{has-block "else"}} | {{hasBlockParams "else"}} | {{has-block-params "else"}} |
 |   [:other] | {{hasBlock "other"}} | {{has-block "other"}} | {{hasBlockParams "other"}} | {{has-block-params "other"}} |
-    `);
+    `
+    );
 
     await render(hbs`<Has />`);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | false | false | false | false |
 | [:default] | false | false | false | false |
@@ -204,7 +214,8 @@ module('Integration | Named Blocks', function(hooks) {
     await render(hbs`<Has>implicit default block without block params</Has>`);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
@@ -216,10 +227,13 @@ module('Integration | Named Blocks', function(hooks) {
       'implicit default block without block params'
     );
 
-    await render(hbs`<Has as |param|>implicit default block with block params</Has>`);
+    await render(
+      hbs`<Has as |param|>implicit default block with block params</Has>`
+    );
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
@@ -238,7 +252,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
@@ -257,7 +272,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
@@ -276,7 +292,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | false | false | false | false |
 | [:default] | false | false | false | false |
@@ -295,7 +312,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | false | false | false | false |
 | [:default] | false | false | false | false |
@@ -314,7 +332,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | false | false | false | false |
 | [:default] | false | false | false | false |
@@ -333,7 +352,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | false | false | false | false |
 | [:default] | false | false | false | false |
@@ -353,7 +373,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
@@ -373,7 +394,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
@@ -393,7 +415,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
@@ -413,7 +436,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
@@ -428,7 +452,8 @@ module('Integration | Named Blocks', function(hooks) {
     await render(hbs`{{has}}`);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | false | false | false | false |
 | [:default] | false | false | false | false |
@@ -443,7 +468,8 @@ module('Integration | Named Blocks', function(hooks) {
     await render(hbs`{{#has}}curly default block without block params{{/has}}`);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
@@ -455,10 +481,13 @@ module('Integration | Named Blocks', function(hooks) {
       'curly default block without block params'
     );
 
-    await render(hbs`{{#has as |param|}}curly default block with block params{{/has}}`);
+    await render(
+      hbs`{{#has as |param|}}curly default block with block params{{/has}}`
+    );
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
@@ -479,7 +508,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | false | false |
 | [:default] | true | true | false | false |
@@ -500,7 +530,8 @@ module('Integration | Named Blocks', function(hooks) {
     `);
 
     assert.equal(
-      this.element.textContent.trim(), `
+      this.element.textContent.trim(),
+      `
 |            | (hasBlock) | (has-block) | (hasBlockParams) | (has-block-params) |
 |            | true | true | true | true |
 | [:default] | true | true | true | true |
