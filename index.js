@@ -13,7 +13,7 @@ module.exports = {
 
   usePolyfill() {
     if (this._usePolyfill === undefined) {
-      let version = new VersionChecker(this).for(`ember-source`);
+      let version = new VersionChecker(this.project).for(`ember-source`);
       this._usePolyfill = version.lt(MINIMUM_NAMED_BLOCKS_VERSION);
     }
 
